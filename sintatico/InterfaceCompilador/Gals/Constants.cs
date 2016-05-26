@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,7 +86,20 @@ namespace InterfaceCompilador.Gals
             "constante int",
             "constante float",
             "constante string",
-            ""
+            "",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada",
+            "palavra reservada"
         };
     }
 }
