@@ -159,7 +159,8 @@ namespace InterfaceCompilador
             try
             {
                 lexico.analisar();
-                sintatico.parse(lexico, semantico);
+                sintatico.analisar(lexico, semantico);
+                this.setTextoAreaMensagem("programa compilado com sucesso");
             }
             catch (LexicalError e)
             {
@@ -167,47 +168,13 @@ namespace InterfaceCompilador
             }
             catch (SyntaticError e)
             {
-                this.setTextoAreaMensagem(string.Format("Erro: {0}", e.Message));
+                this.setTextoAreaMensagem(e.Message);
             }
             catch (SemanticError e)
             {
                 this.setTextoAreaMensagem(string.Format("Erro: {0}", e.Message));
             }
         }
-
-        /*private void montaCabecalhoGrid()
-        {
-            this.saidaAreaMensagem.Clear();
-            this.saidaAreaMensagem.AppendLine("linha".PadRight(this.linha) + "classe".PadRight(this.classe) + "lexema");
-        }*/
-
-        /*private void remontaGrid(int linha, int classe)
-        {
-            if (linha <= this.linha)
-                linha = this.linha;
-            else
-                linha++;
-
-            if (classe <= this.classe)
-                classe = this.classe;
-            else
-                classe++;
-
-            StringBuilder stringBuilder = new StringBuilder();
-            StringReader stringReader = new StringReader(this.saidaAreaMensagem.ToString());
-
-            string linhaAtual;
-            while ((linhaAtual = stringReader.ReadLine()) != null)
-           {
-                string linhaString = linhaAtual.Substring(0, this.linha).ToString().Trim();
-                string classeString = linhaAtual.Substring(this.linha, this.classe).ToString().Trim();
-                string lexemaString = linhaAtual.Substring(this.linha + this.classe, linhaAtual.Length - (this.linha + this.classe)).ToString().Trim();
-                stringBuilder.AppendLine(linhaString.ToString().PadRight(linha) + classeString.ToString().PadRight(classe) + lexemaString.ToString());
-            }
-            this.linha = linha;
-            this.classe = classe;
-            this.saidaAreaMensagem = stringBuilder;
-        }*/
 
         private void gerarCodigo()
         {
