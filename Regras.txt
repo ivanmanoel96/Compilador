@@ -1,0 +1,87 @@
+<programa>  	  	    -> main module <variaveis> "{" <comandos> "}"                      0
+<variaveis>       	    -> ":" <listavariaveis> ";" 									   1
+						   | î ;														   2
+<listavariaveis> 	    -> <identificador> <listavariaveis2> ;                             3
+<listavariaveis2>       -> "," <listavariaveis>                                            4
+						   | î ;                                                           5
+<identificador>   	     -> <tipoidentificadores> <identificador2> ;                       6
+<identificador2>         -> "[" <constanteint> "]"                                         7
+                           | î ;                                                           8
+<tipoidentificadores>    -> identificadorInt                                               9
+                            | identificadorFloat                                           10
+							| identificadorString                                          11
+							| identificadorBool ;                                          12
+<constanteint>           -> constanteInt ;                                                 13
+<comandos>               -> <comando> <comandos2> ;                                        14
+<comandos2>              -> <comandos>                                                     15
+							| î ;                                                          16
+<comando>                -> <comandoatribuicao>                                            17
+							| <comandoentrada>                                             18
+							| <comandosaida>                                               19
+							| <comandoselecao>                                             20
+							| <comandorepeticao> ;                                         21
+<comandoatribuicao>      -> <identificadorcomando> "<-" <expressao> ";" ;                  22
+<identificadorcomando>   -> <tipoidentificadores> <identificadorcomando2> ;                23
+<identificadorcomando2>  -> "[" <expressao> "]"                                            24
+							| î ;                                                          25
+<comandoentrada>         -> in "(" <listaidentificadores> ")" ";" ;                        26
+<listaidentificadores>   -> <identificadorcomando> <listaidentificadores2> ;               27
+<listaidentificadores2>  -> "," <listaidentificadores>                                     28
+							| î ;                                                          29
+<comandosaida>           -> out "(" <listaexpressoes> ")" ";" ;                            30
+<listaexpressoes>        -> <expressao> <listaexpressoes2> ;                               31
+<listaexpressoes2>       -> "," <listaexpressoes>                                          32
+							| î ;                                                          33
+<comandoselecao>         -> if "(" <expressao> ")" <comandoselecao2> ;                     34
+<comandoselecao2>        -> <clausulaistruedo> <comandoselecao3>                           35
+							| <clausulaisfalsedo> <comandoselecao4> ;                      36
+<comandoselecao3>        -> <clausulaisfalsedo>                                            37
+							| î ;                                                          38  
+<comandoselecao4> 		 -> <clausulaistruedo>                                             39
+							| î ;                                                          40
+<clausulaistruedo> 		 -> isTrueDo ":" "{" <listacomandos> "}" ;                         41
+<clausulaisfalsedo> 	 -> isFalseDo ":" "{" <listacomandos> "}" ;                        42
+<listacomandos> 		 -> <comando> <listacomandos2> ;                                   43
+<listacomandos2> 		 -> <listacomandos>                                                44
+							| î ;                                                          45
+<comandorepeticao> 		 -> while "(" <expressao> ")" <comandorepeticao2> ;                46
+<comandorepeticao2> 	 -> <clausulaistruedo>                                             47
+							| <clausulaisfalsedo> ;                                        48
+<expressao> 			 -> <elemento> <expressao1> ;                                      49
+<expressao1> 			 -> and <elemento> <expressao1>                                    50
+							| or <elemento> <expressao1>                                   51
+							| î ;                                                          52
+<elemento> 				 -> <relacional>                                                   53
+							| true 														   54
+							| false  													   55
+							| not <elemento> ;											   56
+<relacional> 			 -> <aritmetica> <relacional1> ;                                   57
+<relacional1> 			 -> <operador_relacional> <aritmetica>                             58
+							| î ;                                                          59
+<operador_relacional>    -> "="                                                            60
+							| "!="                                                         61
+							| "<"                                                          62
+							| "<="                                                         63
+							| ">"                                                          64
+							| ">=" ;                                                       65
+<aritmetica> 			 -> <termo> <aritmetica1> ;                                        66
+<aritmetica1> 			 -> "+" <termo> <aritmetica1>                                      67
+							| "-" <termo> <aritmetica1>                                    68
+							| î ;                                                          69
+<termo> 				 -> <fator> <termo1> ;                                             70
+<termo1> 				 -> "*" <fator> <termo1>                                           71
+							| "/" <fator> <termo1>                                         72
+							| î ;                                                          73
+<fator> 				 -> <identificador_variavel> <vetor_uso>                           74
+							| constanteInt                                                 75
+							| constanteFloat                                               76
+							| constanteString                                              77
+							| "(" <expressao> ")"                                          78
+							| "+" <fator>                                                  79
+							| "-" <fator> ;                                                80
+<identificador_variavel> -> identificadorInt                                               81
+							| identificadorFloat                                           82
+							| identificadorString                                          83
+							| identificadorBool ;                                          84
+<vetor_uso>              -> î                                                              85
+							| "[" <expressao> "]" ;                                        86
