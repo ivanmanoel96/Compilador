@@ -1,4 +1,4 @@
-﻿using InterfaceCompilador.Gals;
+using InterfaceCompilador.Gals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,21 +14,11 @@ namespace InterfaceCompilador
 {
     public partial class Main : Form
     {
-        private int linha;
-        private int classe;
-        private StringBuilder saidaAreaMensagem;
-        Lexico lexico;
-        Sintatico sintatico;
-        Semantico semantico;
-
-        private string[] palavrasReservadas = { "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
-
         public Main()
         {
             InitializeComponent();
             this.setArquivoNaoModificado();
             this.setAreaEditorFocus();
-            this.saidaAreaMensagem = new StringBuilder();
         }
 
         private void novo_Click(object sender, EventArgs e)
@@ -77,7 +67,7 @@ namespace InterfaceCompilador
             {
                 streamWriter.Write(areaEditor.Text.Replace("\n", "\r\n"));
                 streamWriter.Flush();
-                this.areaMensagem.Clear();                
+                this.areaMensagem.Clear();
                 this.setLocalArquivo(localArquivo);
                 this.setArquivoNaoModificado();
             }
@@ -142,7 +132,7 @@ namespace InterfaceCompilador
                     this.setArquivoNaoModificado();
                 }
         }
-        
+
         private void salvar()
         {
             if (!File.Exists(this.localArquivo.Text))
@@ -161,18 +151,19 @@ namespace InterfaceCompilador
 
         private void compilar()
         {
-            lexico = new Lexico(areaEditor.Text);
-            sintatico = new Sintatico();
-            semantico = new Semantico();
+            this.setTextoAreaMensagem("");
+            Lexico lexico = new Lexico(this.areaEditor.Text);
+            Sintatico sintatico = new Sintatico();
+            Semantico semantico = new Semantico();
 
             try
             {
-                this.compiladorLexico();
-                sintatico.parse(lexico, semantico); 
+                lexico.analisar();
+                sintatico.parse(lexico, semantico);
             }
             catch (LexicalError e)
             {
-                this.setTextoAreaMensagem(string.Format("Erro: {0}", e.Message));
+                this.setTextoAreaMensagem(e.Message);
             }
             catch (SyntaticError e)
             {
@@ -184,49 +175,11 @@ namespace InterfaceCompilador
             }
         }
 
-        private void compiladorLexico()
-        {           
-            this.linha = 10;
-            this.classe = 20;
-
-            try
-            {
-                montaCabecalhoGrid();
-                Token token = lexico.nextToken();
-                while (token != null)
-                {
-                    /*if (token.linha.ToString().Length > this.linha || token.classeNome.Length > this.classe)
-                        remontaGrid(token.linha.ToString().Length, token.classeNome.Length);*/
-                    if (token.classe != 30)
-                    {
-                        if(token.classe == 22 && !palavrasReservadas.Contains(token.lexema))
-                        {
-                            throw new LexicalError(string.Format("Erro na linha {0} - {1} palavra reservada inválida", token.linha, token.lexema));
-                        }
-                        this.saidaAreaMensagem.AppendLine(token.linha.ToString().PadRight(this.linha) + token.classeNome.ToString().PadRight(this.classe) + token.lexema);
-                    }
-                    else
-                    {
-                        int linhas = token.toString().Split('\n').Count() - 1;
-                        lexico.linha += linhas;
-                    }
-                    token = lexico.nextToken();
-                }
-
-                this.setTextoAreaMensagem(this.saidaAreaMensagem.ToString());
-            }
-            catch (LexicalError e)
-            {
-                
-                this.setTextoAreaMensagem(e.Message);
-            }
-        }
-
-        private void montaCabecalhoGrid()
+        /*private void montaCabecalhoGrid()
         {
             this.saidaAreaMensagem.Clear();
             this.saidaAreaMensagem.AppendLine("linha".PadRight(this.linha) + "classe".PadRight(this.classe) + "lexema");
-        }
+        }*/
 
         /*private void remontaGrid(int linha, int classe)
         {
@@ -281,7 +234,7 @@ namespace InterfaceCompilador
 
                     case Keys.S:
                         this.salvar();
-                        break;                  
+                        break;
                 }
             else
             {
