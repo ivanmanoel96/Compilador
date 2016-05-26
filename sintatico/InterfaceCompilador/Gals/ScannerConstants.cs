@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -1489,10 +1489,10 @@ namespace InterfaceCompilador.Gals
 
         public string[] SCANNER_ERROR =
         {
-            "Caractere não esperado",
+            "caractere não esperado",
             "",
             "Erro identificando \"!=\"",
-            "Erro identificando constanteString",
+            "constante string inválida",
             "",
             "",
             "",
