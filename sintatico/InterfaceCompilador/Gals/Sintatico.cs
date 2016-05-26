@@ -9,6 +9,7 @@ namespace InterfaceCompilador.Gals
         private Token previousToken;
         private Lexico scanner;
         private Semantico semanticAnalyser;
+        private string[] simbolosEsperados = { ",", ":", ";", "[", "]", "(", ")", "{", "}", "+", "-", "*", "/", "<-", "=", "!=", "<", "<=", ">", ">=", "", "identificador", "identificador", "identificador", "identificador", "constante", "constante", "constante", "", "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
 
         private bool isTerminal(int x)
         {
@@ -58,7 +59,7 @@ namespace InterfaceCompilador.Gals
                 }
                 else
                 {
-                    throw new SyntaticError(PARSER_ERROR[x], currentToken.posicao);
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} " + PARSER_ERROR[x], currentToken.linha, currentToken.lexema), currentToken.posicao);
                 }
             }
             else if (isNonTerminal(x))
@@ -66,13 +67,37 @@ namespace InterfaceCompilador.Gals
                 if (pushProduction(x, a))
                     return false;
                 else
-                    throw new SyntaticError(PARSER_ERROR[x], currentToken.posicao);
+                {
+                    string esperado = retornaSimbolosEsperados(x, a);
+                    esperado = string.IsNullOrEmpty(esperado) ? PARSER_ERROR[x] : "esperado " + esperado;
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} " + esperado, currentToken.linha, currentToken.lexema), currentToken.posicao);
+                }
             }
             else // isSemanticAction(x)
             {
                 semanticAnalyser.executeAction(FIRST_SEMANTIC_ACTION, previousToken);
                 return false;
             }
+        }
+
+        private string retornaSimbolosEsperados(int topStack, int tokenInput)
+        {
+            string simbolosEsperados = "";
+            int p;
+            for (int i = 0; i < 43; i++)
+            {
+                p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, i];
+                if (p > 0)
+                {
+                    if (this.simbolosEsperados[i].Equals("identificador") && simbolosEsperados.Contains("identificador") ||
+                        this.simbolosEsperados[i].Equals("constante") && simbolosEsperados.Contains("constante"))
+                        continue;
+
+                    simbolosEsperados += this.simbolosEsperados[i] + " ";
+                }
+                    
+            }
+            return simbolosEsperados;
         }
 
         private bool pushProduction(int topStack, int tokenInput)
@@ -101,7 +126,7 @@ namespace InterfaceCompilador.Gals
             return array;
         }
 
-        public void parse(Lexico scanner, Semantico semanticAnalyser)
+        public void analisar(Lexico scanner, Semantico semanticAnalyser)
         {
             this.scanner = scanner;
             this.semanticAnalyser = semanticAnalyser;
