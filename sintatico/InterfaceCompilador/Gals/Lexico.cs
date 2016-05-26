@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +23,7 @@ namespace InterfaceCompilador.Gals
             this.posicao = posicao;
         }
 
-        public Token nextToken()
+        public Token proximoToken()
         {
             if (!this.possuiEntrada())
                 return null;
@@ -49,7 +49,6 @@ namespace InterfaceCompilador.Gals
                     fimErro = this.posicao;
                     break;
                 }
-
                 else
                 {
                     if (this.retornaTokenEstado(estado) >= 0)
@@ -77,11 +76,11 @@ namespace InterfaceCompilador.Gals
             int classe = this.retornaTokenEstado(fimEstado);
 
             if (classe == 0)
-                return this.nextToken();
+                return this.proximoToken();
             else
             {
                 string lexema = this.entrada.Substring(inicio, fim - inicio);
-
+                classe = retornaTokenEspecial(classe, lexema);
                 return new Token(classe, lexema, inicio, this.linha, classeTokens[classe]);
             }
         }
@@ -102,7 +101,6 @@ namespace InterfaceCompilador.Gals
                 else  //(SCANNER_TABLE[metade][0] > c)
                     fim = metade - 1;
             }
-
             return -1;
         }
 
@@ -112,6 +110,26 @@ namespace InterfaceCompilador.Gals
                 return -1;
 
             return this.TOKEN_STATE[estado];
+        }
+
+        public int retornaTokenEspecial(int classe, string lexema)
+        {
+            int inicio = SPECIAL_CASES_INDEXES[classe];
+            int fim = SPECIAL_CASES_INDEXES[classe + 1] - 1;
+
+            while (inicio <= fim)
+            {
+                int metade = (inicio + fim) / 2;
+                int comp = SPECIAL_CASES_KEYS[metade].CompareTo(lexema);
+
+                if (comp == 0)
+                    return SPECIAL_CASES_VALUES[metade];
+                else if (comp < 0)
+                    inicio = metade + 1;
+                else  //(comp > 0)
+                    fim = metade - 1;
+            }
+            return classe;
         }
 
         private bool possuiEntrada()
@@ -125,6 +143,23 @@ namespace InterfaceCompilador.Gals
                 return this.entrada[posicao++];
             else
                 return new Char();
+        }
+
+        public void analisar()
+        {
+            Token token = this.proximoToken();
+            while (token != null)
+            {
+                if (token.classe != 30)
+                {
+                    if (token.classe == 22 && !SPECIAL_CASES_KEYS.Contains(token.lexema))
+                    {
+                        throw new LexicalError(string.Format("Erro na linha {0} - {1} palavra reservada inválida", token.linha, token.lexema));
+                    }
+                }
+                token = this.proximoToken();
+            }
+            this.posicao = 0;
         }
     }
 }
