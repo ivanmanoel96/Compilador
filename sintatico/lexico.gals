@@ -1,0 +1,56 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Java
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = String
+#RegularDefinitions
+min : [a-z]
+mai : [A-Z]
+dig : [0-9]
+#Tokens
+","
+":"
+";"
+"["
+"]"
+"("
+")"
+"{"
+"}"
+"+"
+"-"
+"*"
+"/"
+"<-"
+"="
+"!="
+"<"
+"<="
+">"
+">="
+
+palavraReservada : {min} ({min} | {mai} {min})*
+
+identificadorInt : i_({min} | {mai}) ({min}|{mai}|{dig})*
+
+identificadorFloat : f_({min} | {mai}) ({min}|{mai}|{dig})*
+
+identificadorString : s_({min} | {mai}) ({min}|{mai}|{dig})*
+
+identificadorBool : b_({min} | {mai}) ({min}|{mai}|{dig})*
+
+constanteInt : {dig}+
+
+constanteFloat : {dig}+,{dig}+
+
+constanteString : \"[^\"\n]*\"
+
+comentarioBloco :! /"*"([^"*"] | "*"+ [^"*"/])* "*"+/
+
+:[\s\n\t]
+
+
+

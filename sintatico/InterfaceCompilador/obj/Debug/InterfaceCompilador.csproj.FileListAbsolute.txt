@@ -1,0 +1,47 @@
+c:\users\ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.csprojResolveAssemblyReference.cache
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\documents\visual studio 2013\Projects\InterfaceCompilador\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+D:\Estudo\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+D:\Estudo\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+D:\Estudo\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+D:\Estudo\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+D:\Estudo\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+D:\Estudo\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+D:\Estudo\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+D:\Estudo\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\Desktop\interface\InterfaceCompilador\obj\Debug\InterfaceCompilador.csprojResolveAssemblyReference.cache
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csprojResolveAssemblyReference.cache
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+C:\Users\Cleyson Reinhold\Downloads\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csprojResolveAssemblyReference.cache
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache
+C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
