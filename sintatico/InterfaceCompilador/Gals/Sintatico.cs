@@ -52,7 +52,7 @@ namespace InterfaceCompilador.Gals
                     else
                     {
                         previousToken = currentToken;
-                        currentToken = scanner.nextToken();
+                        currentToken = scanner.proximoToken();
                         return false;
                     }
                 }
@@ -77,12 +77,12 @@ namespace InterfaceCompilador.Gals
 
         private bool pushProduction(int topStack, int tokenInput)
         {
-            int p = PARSER_TABLE[topStack-FIRST_NON_TERMINAL,tokenInput-1];
+            int p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, tokenInput - 1];
             if (p >= 0)
             {
                 int[] production = GetRow(PRODUCTIONS, p);
-                //empilha a produção em ordem reversa
-                for (int i=production.Length - 1; i >= 0; i--)
+                //empilha a produÃ§Ã£o em ordem reversa
+                for (int i = production.Length - 1; i >= 0; i--)
                 {
                     stack.Push(production[i]);
                 }
@@ -110,9 +110,9 @@ namespace InterfaceCompilador.Gals
             stack.Push(this.DOLLAR);
             stack.Push(this.START_SYMBOL);
 
-            currentToken = scanner.nextToken();
+            currentToken = scanner.proximoToken();
 
-            while ( ! step() )
+            while (!step())
                 ;
         }
     }
