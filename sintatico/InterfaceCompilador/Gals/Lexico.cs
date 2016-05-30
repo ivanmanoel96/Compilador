@@ -160,6 +160,7 @@ namespace InterfaceCompilador.Gals
                 token = this.proximoToken();
             }
             this.posicao = 0;
+            this.linha = 1;
         }
     }
 }
