@@ -70,7 +70,7 @@ namespace InterfaceCompilador.Gals
                 {
                     string esperado = retornaSimbolosEsperados(x, a);
                     esperado = string.IsNullOrEmpty(esperado) ? PARSER_ERROR[x] : "esperado " + esperado;
-                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} " + esperado, currentToken.linha, currentToken.lexema.ToString().Replace("$", "fim de programa")), currentToken.posicao);
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} {2}", currentToken.linha, currentToken.lexema.ToString().Replace("$", "fim de programa"), esperado), currentToken.posicao);
                 }
             }
             else // isSemanticAction(x)
