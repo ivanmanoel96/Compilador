@@ -69,8 +69,8 @@ namespace InterfaceCompilador.Gals
                 else
                 {
                     string esperado = retornaSimbolosEsperados(x, a);
-                    esperado = string.IsNullOrEmpty(esperado) ? PARSER_ERROR[x] : esperado;
-                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} esperado {2}", currentToken.linha, currentToken.lexema.ToString().Replace("$", "fim de programa"), esperado), currentToken.posicao);
+                    esperado = string.IsNullOrEmpty(esperado) ? PARSER_ERROR[x] : "esperado " + esperado;
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} " + esperado, currentToken.linha, currentToken.lexema.ToString().Replace("$", "fim de programa")), currentToken.posicao);
                 }
             }
             else // isSemanticAction(x)
