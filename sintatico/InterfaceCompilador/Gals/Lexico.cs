@@ -63,10 +63,12 @@ namespace InterfaceCompilador.Gals
             {
                 string lexema = string.Empty;
                 if (estadoFinal == 0)
+                {
                     if (fimErro < 0)
                         lexema = this.entrada.Substring(inicio, 1).TrimEnd() + " ";
                     else
                         lexema = this.entrada.Substring(inicio, fimErro - inicio).TrimEnd() + " ";
+                }
 
                 throw new LexicalError(string.Format("Erro na linha {0} - {1}{2}", this.linha, lexema, this.SCANNER_ERROR[estadoFinal]), inicio);
             }
@@ -150,13 +152,13 @@ namespace InterfaceCompilador.Gals
             Token token = this.proximoToken();
             while (token != null)
             {
-                if (token.classe != 30)
-                {
+                //if (token.classe != 30)
+                //{
                     if (token.classe == 22 && !SPECIAL_CASES_KEYS.Contains(token.lexema))
                     {
                         throw new LexicalError(string.Format("Erro na linha {0} - {1} palavra reservada inválida", token.linha, token.lexema));
                     }
-                }
+                //}
                 token = this.proximoToken();
             }
             this.posicao = 0;

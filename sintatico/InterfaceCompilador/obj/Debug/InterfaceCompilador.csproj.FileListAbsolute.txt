@@ -45,3 +45,12 @@ C:\Users\Ivan\Desktop\lexico\InterfaceCompilador\obj\Debug\InterfaceCompilador.c
 C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
 C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
 C:\Users\Ivan\Desktop\sintatico2\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe.config
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.exe
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.pdb
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\bin\Debug\InterfaceCompilador.exe
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\bin\Debug\InterfaceCompilador.pdb
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csprojResolveAssemblyReference.cache
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Main.resources
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.Properties.Resources.resources
+C:\Users\Cleyson Reinhold\Documents\GitHub\Compilador\sintatico\InterfaceCompilador\obj\Debug\InterfaceCompilador.csproj.GenerateResource.Cache

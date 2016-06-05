@@ -11,48 +11,47 @@ namespace InterfaceCompilador.Gals
         public int EPSILON = 0;
         public int DOLLAR = 1;
 
-        public int t_TOKEN_2 = 2; //","
-        public int t_TOKEN_3 = 3; //":"
-        public int t_TOKEN_4 = 4; //";"
-        public int t_TOKEN_5 = 5; //"["
-        public int t_TOKEN_6 = 6; //"]"
-        public int t_TOKEN_7 = 7; //"("
-        public int t_TOKEN_8 = 8; //")"
-        public int t_TOKEN_9 = 9; //"{"
-        public int t_TOKEN_10 = 10; //"}"
-        public int t_TOKEN_11 = 11; //"+"
-        public int t_TOKEN_12 = 12; //"-"
-        public int t_TOKEN_13 = 13; //"*"
-        public int t_TOKEN_14 = 14; //"/"
-        public int t_TOKEN_15 = 15; //"<-"
-        public int t_TOKEN_16 = 16; //"="
-        public int t_TOKEN_17 = 17; //"!="
-        public int t_TOKEN_18 = 18; //"<"
-        public int t_TOKEN_19 = 19; //"<="
-        public int t_TOKEN_20 = 20; //">"
-        public int t_TOKEN_21 = 21; //">="
-        public int t_palavraReservada = 22;
-        public int t_identificadorInt = 23;
-        public int t_identificadorFloat = 24;
-        public int t_identificadorString = 25;
-        public int t_identificadorBool = 26;
-        public int t_constanteInt = 27;
-        public int t_constanteFloat = 28;
-        public int t_constanteString = 29;
-        public int t_comentarioBloco = 30;
-        public int t_and = 31;
-        public int t_false = 32;
-        public int t_if = 33;
-        public int t_in = 34;
-        public int t_isFalseDo = 35;
-        public int t_isTrueDo = 36;
-        public int t_main = 37;
-        public int t_module = 38;
-        public int t_not = 39;
-        public int t_or = 40;
-        public int t_out = 41;
-        public int t_true = 42;
-        public int t_while = 43;
+        int t_TOKEN_2 = 2; //","
+        int t_TOKEN_3 = 3; //":"
+        int t_TOKEN_4 = 4; //";"
+        int t_TOKEN_5 = 5; //"["
+        int t_TOKEN_6 = 6; //"]"
+        int t_TOKEN_7 = 7; //"("
+        int t_TOKEN_8 = 8; //")"
+        int t_TOKEN_9 = 9; //"{"
+        int t_TOKEN_10 = 10; //"}"
+        int t_TOKEN_11 = 11; //"+"
+        int t_TOKEN_12 = 12; //"-"
+        int t_TOKEN_13 = 13; //"*"
+        int t_TOKEN_14 = 14; //"/"
+        int t_TOKEN_15 = 15; //"<-"
+        int t_TOKEN_16 = 16; //"="
+        int t_TOKEN_17 = 17; //"!="
+        int t_TOKEN_18 = 18; //"<"
+        int t_TOKEN_19 = 19; //"<="
+        int t_TOKEN_20 = 20; //">"
+        int t_TOKEN_21 = 21; //">="
+        int t_palavraReservada = 22;
+        int t_identificadorInt = 23;
+        int t_identificadorFloat = 24;
+        int t_identificadorString = 25;
+        int t_identificadorBool = 26;
+        int t_constanteInt = 27;
+        int t_constanteFloat = 28;
+        int t_constanteString = 29;
+        int t_and = 30;
+        int t_false = 31;
+        int t_if = 32;
+        int t_in = 33;
+        int t_isFalseDo = 34;
+        int t_isTrueDo = 35;
+        int t_main = 36;
+        int t_module = 37;
+        int t_not = 38;
+        int t_or = 39;
+        int t_out = 40;
+        int t_true = 41;
+        int t_while = 42;
 
         public string[] classeTokens =
         {
