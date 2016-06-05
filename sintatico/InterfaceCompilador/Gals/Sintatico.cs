@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 
 namespace InterfaceCompilador.Gals
 {
@@ -9,7 +10,7 @@ namespace InterfaceCompilador.Gals
         private Token previousToken;
         private Lexico scanner;
         private Semantico semanticAnalyser;
-        private string[] simbolosEsperados = { "", ",", ":", ";", "[", "]", "(", ")", "{", "}", "+", "-", "*", "/", "<-", "=", "!=", "<", "<=", ">", ">=", "", "identificador", "identificador", "identificador", "identificador", "constante", "constante", "constante", "", "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
+        private string[] simbolosEsperados = { "", ",", ":", ";", "[", "]", "(", ")", "{", "}", "+", "-", "*", "/", "<-", "=", "!=", "<", "<=", ">", ">=", "", "identificador", "identificador", "identificador", "identificador", "constante", "constante", "constante", "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
 
         private bool isTerminal(int x)
         {
@@ -84,7 +85,7 @@ namespace InterfaceCompilador.Gals
         {
             string simbolosEsperados = "";
             int p;
-            for (int i = 0; i < 43; i++)
+            for (int i = 0; i < 42; i++)
             {
                 p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, i];
                 if (p > 0)
@@ -105,7 +106,16 @@ namespace InterfaceCompilador.Gals
             int p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, tokenInput - 1];
             if (p >= 0)
             {
-                int[] production = GetRow(PRODUCTIONS, p);
+                int[] linha = GetRow(PRODUCTIONS, p);
+                int[] production;
+                if (linha.Where(val => val != 0).ToArray().Count() > 0)
+                {
+                    production = linha.Where(val => val != 0).ToArray();
+                }
+                else
+                {
+                    production = new int[] { 0 };
+                }
                 //empilha a produção em ordem reversa
                 for (int i = production.Length - 1; i >= 0; i--)
                 {
