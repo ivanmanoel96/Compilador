@@ -58,7 +58,7 @@ namespace InterfaceCompilador.Gals
             1417
         };
 
-        public int[,] SCANNER_TABLE = new int[,]
+        public int[,] SCANNER_TABLE = new int[,] 
         {
             {9, 1},
             {10, 1},
@@ -1479,13 +1479,13 @@ namespace InterfaceCompilador.Gals
             {122, 43}
         };
 
-        public int[] TOKEN_STATE = { -2, 0, -1, -1, 7, 8, 13, 11, 2, 12, 14, 27, 3, 4, 18, 16, 20, 5, 6, 22, 22, 22, 22, 22, 9, 10, 17, 29, -2, -1, 15, 19, 21, -1, -1, -1, -1, -1, -2, 28, 26, 24, 23, 25, 0 };
+        public int[] TOKEN_STATE = { -2, 0, -1, -1, 7, 8, 13, 11, 2, 12, 14, 27, 3, 4, 18, 16, 20, 5, 6, 22, 22, 22, 22, 22, 9, 10, 17, 29, -2, -1, 15, 19, 21, -1, -1, -1, -1, -1, -2, 28, 26, 24, 23, 25, 30 };
 
-        public int[] SPECIAL_CASES_INDEXES = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13 };
+        public int[] SPECIAL_CASES_INDEXES = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13 };
 
         public string[] SPECIAL_CASES_KEYS = { "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
 
-        public int[] SPECIAL_CASES_VALUES = { 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42 };
+        public int[] SPECIAL_CASES_VALUES = { 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 };
 
         public string[] SCANNER_ERROR =
         {
@@ -1517,7 +1517,7 @@ namespace InterfaceCompilador.Gals
             "",
             "",
             "",
-            "Erro identificando <ignorar>",
+            "Erro identificando comentarioBloco",
             "Erro identificando constanteFloat",
             "",
             "",
@@ -1527,7 +1527,7 @@ namespace InterfaceCompilador.Gals
             "Erro identificando identificadorFloat",
             "Erro identificando identificadorInt",
             "Erro identificando identificadorString",
-            "Erro identificando <ignorar>",
+            "Erro identificando comentarioBloco",
             "",
             "",
             "",

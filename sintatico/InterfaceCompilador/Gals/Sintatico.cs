@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 
 namespace InterfaceCompilador.Gals
 {
@@ -10,7 +9,8 @@ namespace InterfaceCompilador.Gals
         private Token previousToken;
         private Lexico scanner;
         private Semantico semanticAnalyser;
-        private string[] simbolosEsperados = { "", ",", ":", ";", "[", "]", "(", ")", "{", "}", "+", "-", "*", "/", "<-", "=", "!=", "<", "<=", ">", ">=", "", "identificador", "identificador", "identificador", "identificador", "constante", "constante", "constante", "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
+        private string[] simbolosEsperados = { "", ",", ":", ";", "[", "]", "(", ")", "{", "}", "+", "-", "*", "/", "<-", "=", "!=", "<", "<=", ">", ">=", "", "identificador", "identificador", "identificador", "identificador", "constante", "constante", "constante", "", "and", "false", "if", "in", "isFalseDo", "isTrueDo", "main", "module", "not", "or", "out", "true", "while" };
+        private const char space = ' ';
 
         private bool isTerminal(int x)
         {
@@ -41,10 +41,13 @@ namespace InterfaceCompilador.Gals
             int x = ((int)stack.Pop());
             int a = currentToken.classe;
 
+            if (isNonTerminal(x) && a == DOLLAR)
+                x = ((int)stack.Pop());
+
             if (x == EPSILON)
             {
                 return false;
-            }
+            }            
             else if (isTerminal(x))
             {
                 if (x == a)
@@ -60,7 +63,9 @@ namespace InterfaceCompilador.Gals
                 }
                 else
                 {
-                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} " + PARSER_ERROR[x], currentToken.linha, currentToken.lexema), currentToken.posicao);
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} esperado {2}", currentToken.linha,
+                                                                                                             currentToken.lexema.ToString().Replace("$", "fim de programa"),
+                                                                                                             PARSER_ERROR[x]), currentToken.posicao);
                 }
             }
             else if (isNonTerminal(x))
@@ -69,9 +74,10 @@ namespace InterfaceCompilador.Gals
                     return false;
                 else
                 {
-                    string esperado = retornaSimbolosEsperados(x, a);
-                    esperado = string.IsNullOrEmpty(esperado) ? PARSER_ERROR[x] : "esperado " + esperado;
-                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} {2}", currentToken.linha, currentToken.lexema.ToString().Replace("$", "fim de programa"), esperado), currentToken.posicao);
+                    string esperado = string.IsNullOrEmpty(PARSER_ERROR[x]) ? retornaSimbolosEsperados(x, a) : PARSER_ERROR[x];
+                    throw new SyntaticError(string.Format("Erro na linha {0} - encontrado {1} esperado {2}", currentToken.linha, 
+                                                                                                             currentToken.lexema.ToString().Replace("$", "fim de programa"), 
+                                                                                                             esperado), currentToken.posicao);
                 }
             }
             else // isSemanticAction(x)
@@ -85,20 +91,21 @@ namespace InterfaceCompilador.Gals
         {
             string simbolosEsperados = "";
             int p;
-            for (int i = 0; i < 42; i++)
+            
+            for (int simbolo = 0; simbolo < this.simbolosEsperados.Length; simbolo++)
             {
-                p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, i];
+                p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, simbolo];
                 if (p > 0)
                 {
-                    if (this.simbolosEsperados[i].Equals("identificador") && simbolosEsperados.Contains("identificador") ||
-                        this.simbolosEsperados[i].Equals("constante") && simbolosEsperados.Contains("constante"))
+                    if (this.simbolosEsperados[simbolo].Equals("identificador") && simbolosEsperados.Contains("identificador") ||
+                        this.simbolosEsperados[simbolo].Equals("constante") && simbolosEsperados.Contains("constante"))
                         continue;
 
-                    simbolosEsperados += this.simbolosEsperados[i] + " ";
+                    simbolosEsperados += this.simbolosEsperados[simbolo] + space;
                 }
-                    
+
             }
-            return simbolosEsperados;
+            return simbolosEsperados.Trim();
         }
 
         private bool pushProduction(int topStack, int tokenInput)
@@ -106,16 +113,7 @@ namespace InterfaceCompilador.Gals
             int p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, tokenInput - 1];
             if (p >= 0)
             {
-                int[] linha = GetRow(PRODUCTIONS, p);
-                int[] production;
-                if (linha.Where(val => val != 0).ToArray().Count() > 0)
-                {
-                    production = linha.Where(val => val != 0).ToArray();
-                }
-                else
-                {
-                    production = new int[] { 0 };
-                }
+                int[] production = GetRow(PRODUCTIONS, p);
                 //empilha a produção em ordem reversa
                 for (int i = production.Length - 1; i >= 0; i--)
                 {
@@ -147,8 +145,7 @@ namespace InterfaceCompilador.Gals
 
             currentToken = scanner.proximoToken();
 
-            while (!step())
-                ;
+            while (!step());
         }
     }
 }
