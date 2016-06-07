@@ -93,16 +93,7 @@ namespace InterfaceCompilador.Gals
             int p = PARSER_TABLE[topStack - FIRST_NON_TERMINAL, tokenInput - 1];
             if (p >= 0)
             {
-                int[] linha = GetRow(PRODUCTIONS, p);
-                int[] production;
-                if (linha.Where(val => val != 0).ToArray().Count() > 0)
-                {
-                    production = linha.Where(val => val != 0).ToArray();
-                }
-                else
-                {
-                    production = new int[] { 0 };
-                }
+                int[] production = GetRow(PRODUCTIONS, p);
                 //empilha a produção em ordem reversa
                 for (int i = production.Length - 1; i >= 0; i--)
                 {
