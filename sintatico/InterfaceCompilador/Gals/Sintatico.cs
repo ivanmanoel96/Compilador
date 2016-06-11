@@ -36,8 +36,6 @@ namespace InterfaceCompilador.Gals
                     posicao = previousToken.posicao + previousToken.lexema.Length;
                     linha = previousToken.linha;
                 }
-                    
-
                 currentToken = new Token(DOLLAR, "$", posicao, linha, "");
             }
 
@@ -81,11 +79,12 @@ namespace InterfaceCompilador.Gals
                                                                                                              PARSER_ERROR[x]), currentToken.posicao);
                 }
             }
-            else // isSemanticAction(x)
+            else if (isSemanticAction(x))
             {
                 semanticAnalyser.executeAction(FIRST_SEMANTIC_ACTION, previousToken);
                 return false;
             }
+            return false;
         }
 
         private bool pushProduction(int topStack, int tokenInput)
