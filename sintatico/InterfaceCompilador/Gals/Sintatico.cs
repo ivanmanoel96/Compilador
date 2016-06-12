@@ -81,7 +81,7 @@ namespace InterfaceCompilador.Gals
             }
             else if (isSemanticAction(x))
             {
-                semanticAnalyser.executeAction(FIRST_SEMANTIC_ACTION, previousToken);
+                semanticAnalyser.executeAction(x, previousToken);
                 return false;
             }
             return false;
