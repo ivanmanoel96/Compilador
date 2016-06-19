@@ -21,6 +21,7 @@ namespace InterfaceCompilador.Gals
         string INT64 = "int64";
         string FLOAT64 = "float64";
         string BOOL = "bool";
+        string STRING = "string";
 
         public void executeAction(int action, Token token)
         {
@@ -80,10 +81,10 @@ namespace InterfaceCompilador.Gals
                     acao17();
                     break;
                 case 18:
-                    acao18();
+                    acao18(token);
                     break;
                 case 19:
-                    acao19();
+                    acao19(token);
                     break;
                 default:
                     break;
@@ -285,9 +286,9 @@ namespace InterfaceCompilador.Gals
                 codigoFonte.AppendLine(".assembly extern mscorlib {}");
                 codigoFonte.AppendLine(".assembly codigo_objeto{}");
                 codigoFonte.AppendLine(".module codigo_objeto.exe");
-                codigoFonte.AppendLine("");
+                codigoFonte.AppendLine(".class public _Principal {");
                 codigoFonte.AppendLine(".method static public void _principal(){");
-                codigoFonte.AppendLine(".entrypoint )");
+                codigoFonte.AppendLine(".entrypoint");
             }
             catch (Exception e)
             {
@@ -311,26 +312,100 @@ namespace InterfaceCompilador.Gals
 
         private void acao14()
         {
+            try
+            {
+                string tipo1 = pilhaTipos.Pop();
+                string tipo2 = pilhaTipos.Pop();
+                if (tipo1 == BOOL && tipo2 == BOOL)
+                    pilhaTipos.Push(BOOL);
+                else
+                    throw new SemanticError("Erro semantico na acao 14. Erro: tipos incompatíveis");
+                codigoFonte.AppendLine("and");
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 14. Erro: {0}", e.Message));
+            }
         }
 
         private void acao15()
         {
+            try
+            {
+                string tipo1 = pilhaTipos.Pop();
+                string tipo2 = pilhaTipos.Pop();
+                if (tipo1 == BOOL && tipo2 == BOOL)
+                    pilhaTipos.Push(BOOL);
+                else
+                    throw new SemanticError("Erro semantico na acao 15. Erro: tipos incompatíveis");
+                codigoFonte.AppendLine("or");
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 15. Erro: {0}", e.Message));
+            }
         }
 
         private void acao16()
         {
+            try
+            {
+                pilhaTipos.Push(BOOL);
+                codigoFonte.AppendLine("ldc.i4.1");
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 16. Erro: {0}", e.Message));
+            }
         }
 
         private void acao17()
         {
+            try
+            {
+                pilhaTipos.Push(BOOL);
+                codigoFonte.AppendLine("ldc.i4.0");
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 17. Erro: {0}", e.Message));
+            }
         }
 
-        private void acao18()
+        private void acao18(Token token)
         {
+            try
+            {
+                pilhaTipos.Push(BOOL);
+                string tipo = pilhaTipos.Pop();
+                if (tipo == BOOL)
+                {
+                    if (token.lexema == "true")
+                        codigoFonte.AppendLine("ldc.i4.0");
+                    else
+                        codigoFonte.AppendLine("ldc.i4.1");
+                }
+                else
+                    throw new SemanticError("Erro semantico na acao 18. Erro: tipos incompatíveis");
+                codigoFonte.AppendLine("or");
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 18. Erro: {0}", e.Message));
+            }
         }
 
-        private void acao19()
+        private void acao19(Token token)
         {
+            try
+            {
+                pilhaTipos.Push(STRING);
+                codigoFonte.AppendLine(string.Format("ldstr {0}", token.lexema));
+            }
+            catch (Exception e)
+            {
+                throw new SemanticError(string.Format("Erro semantico na acao 19. Erro: {0}", e.Message));
+            }
         }
     }
 }
