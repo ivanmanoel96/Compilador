@@ -16,7 +16,10 @@ namespace InterfaceCompilador.Gals
         }
         StringBuilder codigoFonte = new StringBuilder();
         Stack<string> pilhaTipos = new Stack<string>();
+        List<string> listaIdentificadores = new List<string>();
+        Dictionary<string, string> tabelaSimbolos = new Dictionary<string, string>();
         string operadorRelacional;
+        string tipo;
 
         string INT64 = "int64";
         string FLOAT64 = "float64";
@@ -103,7 +106,7 @@ namespace InterfaceCompilador.Gals
                     pilhaTipos.Push(INT64);
                 codigoFonte.AppendLine("add");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new SemanticError(string.Format("Erro semantico na acao 1. Erro: {0}", e.Message));
             }
@@ -154,7 +157,7 @@ namespace InterfaceCompilador.Gals
                 if (tipo1 == tipo2)
                     pilhaTipos.Push(tipo1);
                 else
-                    throw new SemanticError("Erro sem‚ntico na acao 4.");
+                    throw new SemanticError("Erro sem√¢ntico na acao 4.");
                 codigoFonte.AppendLine("div");
             }
             catch (Exception e)
@@ -197,7 +200,7 @@ namespace InterfaceCompilador.Gals
                 if (tipo == INT64 || tipo == INT64)
                     pilhaTipos.Push(tipo);
                 else
-                    throw new SemanticError("Erro sem‚ntico na acao 7.");
+                    throw new SemanticError("Erro sem√¢ntico na acao 7.");
             }
             catch (Exception e)
             {
@@ -213,7 +216,7 @@ namespace InterfaceCompilador.Gals
                 if (tipo == INT64 || tipo == INT64)
                     pilhaTipos.Push(tipo);
                 else
-                    throw new SemanticError("Erro sem‚ntico na acao 8.");
+                    throw new SemanticError("Erro sem√¢ntico na acao 8.");
                 codigoFonte.AppendLine("ldc.i8 -1");
                 codigoFonte.AppendLine("mul");
             }
@@ -319,7 +322,7 @@ namespace InterfaceCompilador.Gals
                 if (tipo1 == BOOL && tipo2 == BOOL)
                     pilhaTipos.Push(BOOL);
                 else
-                    throw new SemanticError("Erro semantico na acao 14. Erro: tipos incompatÌveis");
+                    throw new SemanticError("Erro semantico na acao 14. Erro: tipos incompat√≠veis");
                 codigoFonte.AppendLine("and");
             }
             catch (Exception e)
@@ -337,7 +340,7 @@ namespace InterfaceCompilador.Gals
                 if (tipo1 == BOOL && tipo2 == BOOL)
                     pilhaTipos.Push(BOOL);
                 else
-                    throw new SemanticError("Erro semantico na acao 15. Erro: tipos incompatÌveis");
+                    throw new SemanticError("Erro semantico na acao 15. Erro: tipos incompat√≠veis");
                 codigoFonte.AppendLine("or");
             }
             catch (Exception e)
@@ -386,7 +389,7 @@ namespace InterfaceCompilador.Gals
                         codigoFonte.AppendLine("ldc.i4.1");
                 }
                 else
-                    throw new SemanticError("Erro semantico na acao 18. Erro: tipos incompatÌveis");
+                    throw new SemanticError("Erro semantico na acao 18. Erro: tipos incompat√≠veis");
                 codigoFonte.AppendLine("or");
             }
             catch (Exception e)
@@ -406,6 +409,110 @@ namespace InterfaceCompilador.Gals
             {
                 throw new SemanticError(string.Format("Erro semantico na acao 19. Erro: {0}", e.Message));
             }
+        }
+
+        private void acao20(Token token)
+        {
+            //Nao encontrei o uso da a√ßao #20 no documento dela, e pra saber o tipo acho que tem que olhar i_, r_, b_, talvez string tamb√©m
+            switch (token.lexema)
+            {
+                case "int":
+                    tipo = INT64;
+                    break;
+                case "real":
+                    tipo = FLOAT64;
+                    break;
+
+                case "bool":
+                    tipo = BOOL;
+                    break;
+
+                default:
+                    throw new SemanticError("Erro semantico na acao 20");
+            }
+        }
+
+        private void acao21(Token token)
+        {
+            listaIdentificadores.Add(token.lexema);
+        }
+
+        private void acao22(Token token)
+        {
+            foreach (string identificador in listaIdentificadores)
+            {
+                if (tabelaSimbolos.ContainsKey(identificador))
+                    throw new SemanticError("Erro semantico na acao 22");
+
+                tabelaSimbolos.Add(identificador, tipo);
+                codigoFonte.AppendLine(string.Format(".locals ({0} {1})", tipo, identificador));
+            }
+            listaIdentificadores.Clear();
+            tipo = "";
+        }
+
+        private void acao23(Token token)
+        {
+            foreach (string identificador in listaIdentificadores)
+            {
+                if (!tabelaSimbolos.ContainsKey(identificador))
+                    throw new SemanticError("Erro semantico na acao 23");
+
+                tabelaSimbolos.TryGetValue(identificador, out tipo);
+
+                string classe = "";
+
+                switch (tipo)
+                {
+                    case "int64":
+                        classe = "Int64";
+                        break;
+
+                    case "flot64":
+                        classe = "Double";
+                        break;
+
+                    case "bool":
+                        classe = "Boolean";
+                        break;
+
+                    //TIPO string n√£o guarda, talvez devesse guardar
+
+                    default:
+                        throw new SemanticError("Erro semantico na acao 23");
+                }
+                codigoFonte.AppendLine("call string [mscorlib]System.Console::ReadLine()");
+                codigoFonte.AppendLine(string.Format("call {0} [mscorlib]System.{1}::Parse(string)", tipo, classe));
+                codigoFonte.AppendLine(string.Format("stloc {0}", token.lexema));
+            }
+            listaIdentificadores.Clear();
+        }
+
+        private void acao24(Token token)
+        {
+            string identificador = token.lexema;
+            if (!tabelaSimbolos.ContainsKey(identificador))
+                throw new SemanticError("Erro semantico na acao 24");
+
+            tabelaSimbolos.TryGetValue(identificador, out tipo);
+            pilhaTipos.Push(tipo);
+            codigoFonte.AppendLine(string.Format("ldloc {0}", identificador));
+        }
+
+        private void acao25(Token token)
+        {
+            string identificador = token.lexema;
+            listaIdentificadores.Remove(identificador);
+            if (!tabelaSimbolos.ContainsKey(identificador))
+                throw new SemanticError("Erro semantico na acao 25");
+
+            tabelaSimbolos.TryGetValue(identificador, out tipo);
+            string tipoExpressao = pilhaTipos.Pop();
+
+            if (tipo == INT64 && tipoExpressao == FLOAT64)
+                throw new SemanticError("Erro semantico na acao 25");
+
+            codigoFonte.AppendLine(string.Format("stloc {0}", identificador));
         }
     }
 }
