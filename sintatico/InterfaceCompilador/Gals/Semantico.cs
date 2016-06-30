@@ -89,6 +89,21 @@ namespace InterfaceCompilador.Gals
                 case 19:
                     acao19(token);
                     break;
+                case 21:
+                    acao21(token);
+                    break;
+                case 22:
+                    acao22(token);
+                    break;
+                case 23:
+                    acao23(token);
+                    break;
+                case 24:
+                    acao24(token);
+                    break;
+                case 25:
+                    acao25();
+                    break;
                 default:
                     break;
             }
@@ -289,8 +304,10 @@ namespace InterfaceCompilador.Gals
                 codigoFonte.AppendLine(".assembly extern mscorlib {}");
                 codigoFonte.AppendLine(".assembly codigo_objeto{}");
                 codigoFonte.AppendLine(".module codigo_objeto.exe");
+                codigoFonte.AppendLine("");
                 codigoFonte.AppendLine(".class public _Principal {");
-                codigoFonte.AppendLine(".method static public void _principal(){");
+                codigoFonte.AppendLine("");
+                codigoFonte.AppendLine(".method static public void _principal() {");
                 codigoFonte.AppendLine(".entrypoint");
             }
             catch (Exception e)
@@ -411,27 +428,6 @@ namespace InterfaceCompilador.Gals
             }
         }
 
-        private void acao20(Token token)
-        {
-            //Nao encontrei o uso da açao #20 no documento dela, e pra saber o tipo acho que tem que olhar i_, r_, b_, talvez string também
-            switch (token.lexema)
-            {
-                case "int":
-                    tipo = INT64;
-                    break;
-                case "real":
-                    tipo = FLOAT64;
-                    break;
-
-                case "bool":
-                    tipo = BOOL;
-                    break;
-
-                default:
-                    throw new SemanticError("Erro semantico na acao 20");
-            }
-        }
-
         private void acao21(Token token)
         {
             listaIdentificadores.Add(token.lexema);
@@ -443,6 +439,24 @@ namespace InterfaceCompilador.Gals
             {
                 if (tabelaSimbolos.ContainsKey(identificador))
                     throw new SemanticError("Erro semantico na acao 22");
+
+                switch (token.lexema.Substring(0, 2))
+                {
+                    case "i_":
+                        tipo = INT64;
+                        break;
+                    case "r_":
+                        tipo = FLOAT64;
+                        break;
+                    case "b_":
+                        tipo = BOOL;
+                        break;
+                    case "s_":
+                        tipo = STRING;
+                        break;
+                    default:
+                        throw new SemanticError("Erro semantico na acao 21");
+                }
 
                 tabelaSimbolos.Add(identificador, tipo);
                 codigoFonte.AppendLine(string.Format(".locals ({0} {1})", tipo, identificador));
@@ -499,10 +513,10 @@ namespace InterfaceCompilador.Gals
             codigoFonte.AppendLine(string.Format("ldloc {0}", identificador));
         }
 
-        private void acao25(Token token)
+        private void acao25()
         {
-            string identificador = token.lexema;
-            listaIdentificadores.Remove(identificador);
+            string identificador = listaIdentificadores[0];
+            listaIdentificadores.RemoveAt(0);
             if (!tabelaSimbolos.ContainsKey(identificador))
                 throw new SemanticError("Erro semantico na acao 25");
 
